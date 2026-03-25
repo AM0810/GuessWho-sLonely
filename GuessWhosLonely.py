@@ -1,7 +1,7 @@
 import pandas as pd
 from random import randint
 charactersdf = pd.read_csv(open('Names.csv', "r"))
-possiblecharactersdf = charactersdf
+possiblecharactersdf = charactersdf.copy()
 charactersdf["HairLength"] = charactersdf["HairLength"].str.lower()
 charactersdf["HairColour"] = charactersdf["HairColour"].str.lower()
 charactersdf["SkinColour"] = charactersdf["SkinColour"].str.lower()
@@ -21,7 +21,7 @@ possiblecharactersdf["EyeColour"] = charactersdf["EyeColour"].str.lower()
 
 # Main menu if the computer is the one guessing the player's character
 def ComputerGuesserMenu():
-
+    global possiblecharactersdf
     Questions = ["1", "2", "3", "4", "5", "6", "7", "8"]
     def QuestionRandomiser():
         if len(Questions) > 1:
@@ -137,80 +137,83 @@ def ComputerGuesserMenu():
     CharacterFound = False
     while CharacterFound == False:
         ChosenQuestion = QuestionRandomiser()
-    if ChosenQuestion == "1":
-        while True:
-            ListHairLength = HairLengthQuestionFunction()
-            if ListHairLength[0] == "yes" or ListHairLength[0] == "y":
-                HairLength = ListHairLength[1]
-                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HairLength"] == HairLength]
-                if len(possiblecharactersdf.index) == 1:
-                    CharacterFound = True
-                break
-            if ListHairLength[0] == "no" or ListHairLength[0] == "n":
-                continue
-            else:
-                print("Invalid input! Please type yes or no")
-                continue
-    elif ChosenQuestion == "2":
-        while True:
-            ListHairColour = HairColourQuestionFunction()
-            if ListHairColour[0] == "yes" or ListHairColour[0] == "y":
-                HairColour = ListHairColour[1]
-                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HairColour"] == HairColour]
-                if len(possiblecharactersdf.index) == 1:
-                    CharacterFound = True
-                break
-            if ListHairColour[0] == "no" or ListHairColour[0] == "n":
-                continue
-            else:
-                print("Invalid input! Please type yes or no")
-                continue
-    elif ChosenQuestion == "3":
-        while True:
-            ListSkinColour = SkinColourQuestionFunction()
-            if ListSkinColour[0] == "yes" or ListSkinColour[0] == "y":
-                SkinColour = ListSkinColour[1]
-                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["SkinColour"] == SkinColour]
-                if len(possiblecharactersdf.index) == 1:
-                    CharacterFound = True
-                break
-            if ListSkinColour[0] == "no" or ListSkinColour[0] == "n":
-                continue
-            else:
-                print("Invalid input! Please type yes or no")
-                continue
-    elif ChosenQuestion == "4":
-        while True:
-            ListEyeColour = EyeColourQuestionFunction()
-            if ListEyeColour[0] == "yes" or ListEyeColour[0] == "y":
-                EyeColour = ListEyeColour[1]
-                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["EyeColour"] == EyeColour]
-                if len(possiblecharactersdf.index) == 1:
-                    CharacterFound = True
-                break
-            if ListEyeColour[0] == "no" or ListEyeColour[0] == "n":
-                continue
-            else:
-                print("Invalid input! Please type yes or no")
-                continue
+        if ChosenQuestion == "1":
+            while True:
+                ListHairLength = HairLengthQuestionFunction()
+                if ListHairLength[0] == "yes" or ListHairLength[0] == "y":
+                    HairLength = ListHairLength[1]
+                    possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HairLength"] == HairLength]
+                    if len(possiblecharactersdf.index) == 1:
+                        CharacterFound = True
+                    break
+                if ListHairLength[0] == "no" or ListHairLength[0] == "n":
+                    continue
+                else:
+                    print("Invalid input! Please type yes or no")
+                    continue
+        elif ChosenQuestion == "2":
+            while True:
+                ListHairColour = HairColourQuestionFunction()
+                if ListHairColour[0] == "yes" or ListHairColour[0] == "y":
+                    HairColour = ListHairColour[1]
+                    possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HairColour"] == HairColour]
+                    if len(possiblecharactersdf.index) == 1:
+                        CharacterFound = True
+                    break
+                if ListHairColour[0] == "no" or ListHairColour[0] == "n":
+                    continue
+                else:
+                    print("Invalid input! Please type yes or no")
+                    continue
+        elif ChosenQuestion == "3":
+            while True:
+                ListSkinColour = SkinColourQuestionFunction()
+                if ListSkinColour[0] == "yes" or ListSkinColour[0] == "y":
+                    SkinColour = ListSkinColour[1]
+                    possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["SkinColour"] == SkinColour]
+                    if len(possiblecharactersdf.index) == 1:
+                        CharacterFound = True
+                    break
+                if ListSkinColour[0] == "no" or ListSkinColour[0] == "n":
+                    continue
+                else:
+                    print("Invalid input! Please type yes or no")
+                    continue
+        elif ChosenQuestion == "4":
+            while True:
+                ListEyeColour = EyeColourQuestionFunction()
+                if ListEyeColour[0] == "yes" or ListEyeColour[0] == "y":
+                    EyeColour = ListEyeColour[1]
+                    possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["EyeColour"] == EyeColour]
+                    if len(possiblecharactersdf.index) == 1:
+                        CharacterFound = True
+                    break
+                if ListEyeColour[0] == "no" or ListEyeColour[0] == "n":
+                    continue
+                else:
+                    print("Invalid input! Please type yes or no")
+                    continue
 
-    elif ChosenQuestion == "5":
-        HasEarrings = HasEarringsQuestionFunction()
-        if HasEarrings == "yes" or HasEarrings == "y":
-            possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HasEarrings"] == HasEarrings]
-            print(possiblecharactersdf)
-            if len(possiblecharactersdf.index) == 1:
-                CharacterFound = True
-        if HasEarrings == "no" or HasEarrings == "n":
-            possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HasEarrings"] != HasEarrings]
-            print(possiblecharactersdf)
+        elif ChosenQuestion == "5":
+            HasEarrings = HasEarringsQuestionFunction()
+            if HasEarrings == "yes":
+                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HasEarrings"] == HasEarrings]
+                print(possiblecharactersdf)
+                if len(possiblecharactersdf.index) == 1:
+                    CharacterFound = True
+            if HasEarrings == "no":
+                possiblecharactersdf = possiblecharactersdf[possiblecharactersdf["HasEarrings"] != HasEarrings]
+                print(possiblecharactersdf)
 
-    elif ChosenQuestion == "6":
-        Glasses = HasGlassesQuestionFunction()
-    elif ChosenQuestion == "7":
-        FacialHair = HasFacialHairQuestionFunction()
-    elif ChosenQuestion == "8":
-        Hat = HasHatQuestionFunction()
+        elif ChosenQuestion == "6":
+            # Glasses = HasGlassesQuestionFunction()
+            print("test placeholder")
+        elif ChosenQuestion == "7":
+            # FacialHair = HasFacialHairQuestionFunction()
+            print("test placeholder")
+        elif ChosenQuestion == "8":
+            print("test placeholder")
+            # Hat = HasHatQuestionFunction()
     
     print(possiblecharactersdf)
 
